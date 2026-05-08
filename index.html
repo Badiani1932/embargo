@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badiani Firenze 1932 — Ora a Milano</title>
+  <meta name="description" content="Dal cuore di Firenze, il nostro autentico gelato artigianale arriva a Milano. Consegne due volte al mese. Ordina su Embargo.">
+
+  <meta property="og:title" content="Badiani Firenze 1932 — Ora a Milano">
+  <meta property="og:description" content="Dal cuore di Firenze, il nostro autentico gelato artigianale arriva a Milano. Consegne due volte al mese.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="milano-badiani-standing.webp">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <style>
+    /* ============================================================
+       BADIANI · TYPE SYSTEM
+       Single font family: SuperGroteskC (variable weight 1–1000).
+       Tutti i caratteri (lettere, cifre, punteggiatura, accenti, smart quotes)
+       passano per la stessa font → peso coerente al 100%.
+       ============================================================ */
+    @font-face{
+      font-family:'Badiani';
+      src:url('fonts/SuperGroteskC-MedLF.otf') format('opentype');
+      font-weight:1 1000;
+      font-style:normal;
+      font-display:swap;
+    }
+
+    /* ============================================================
+       DESIGN TOKENS
+       Weight scale:  400 body · 500 label · 600 ui · 700 display
+       Tracking scale: 0 body · 1px head · 2px label · 5px eyebrow
+       ============================================================ */
+    :root{
+      /* Brand colors */
+      --c-blue:#1e398d;
+      --c-blue-deep:#152a6e;
+      --c-pink:#f067a6;
+      --c-yellow:#D8A200;
+      --c-gray:#58595b;
+      --c-bg:#f8f8f8;
+
+      /* Type weights */
+      --fw-body:400;
+      --fw-label:500;
+      --fw-ui:600;
+      --fw-display:700;
+
+      /* Letter-spacing */
+      --ls-body:0;
+      --ls-head:1px;
+      --ls-label:2px;
+      --ls-eyebrow:5px;
+    }
+
+    *{margin:0; padding:0; box-sizing:border-box;}
+    html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+    body, html{
+      font-family:'Badiani', system-ui, -apple-system, sans-serif;
+      font-weight:var(--fw-body);
+      font-size:17px;
+      background:var(--c-bg);
+      color:var(--c-gray);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+    em, i{ font-style:normal; }
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
+
+    h1, h2, h3{
+      font-weight:var(--fw-display);
+      text-transform:uppercase;
+      letter-spacing:var(--ls-head);
+      line-height:1.12;
+    }
+
+    .highlight-pink{
+      background:var(--c-pink);
+      color:#fff;
+      padding:2px 10px;
+      font-weight:var(--fw-ui);
+      border-radius:3px;
+      white-space:nowrap;
+      text-transform:uppercase;
+      letter-spacing:var(--ls-head);
+    }
+
+    /* Eyebrow uniforme: uppercase con tracking ampio.
+       Min 13px su mobile, max 16px su desktop. */
+    .eyebrow{
+      font-size:clamp(13px, 1.15vw, 16px);
+      letter-spacing:var(--ls-eyebrow);
+      text-transform:uppercase;
+      font-weight:var(--fw-ui);
+      display:inline-block;
+    }
+
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header-wrapper{ position:sticky; top:0; z-index:1000; box-shadow:0 2px 14px rgba(0,0,0,0.18); }
+    header{
+      background:var(--c-blue);
+      padding:16px clamp(16px,3.2vw,40px);
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:clamp(10px,1.6vw,24px);
+    }
+    .logo-img{
+      height:clamp(40px,3.6vw,50px); width:auto; object-fit:contain;
+      filter:brightness(0) invert(1);
+    }
+    .nav-cta{
+      display:inline-block;
+      /* Padding asimmetrico: top più grande del bottom per compensare
+         la metrica verticale del SuperGroteskC (uppercase senza descenders
+         hanno il centro ottico sopra il centro geometrico). */
+      padding:17px 28px 13px;
+      background:var(--c-pink);
+      color:#fff;
+      border-radius:30px;
+      font-size:14px;
+      letter-spacing:var(--ls-label);
+      text-transform:uppercase;
+      font-weight:var(--fw-ui);
+      transition:all 0.3s;
+      box-shadow:0 6px 20px rgba(240,103,166,0.35);
+      line-height:1;
+    }
+    .nav-cta:hover{ background:#fff; color:var(--c-blue); transform:translateY(-2px); }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero{
+      position:relative;
+      min-height:640px;
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:#fff;
+      padding:80px 0;
+    }
+    .hero-bg{
+      position:absolute; inset:0;
+      background-image:url('milano-badiani-standing.webp');
+      background-size:cover;
+      background-position:center;
+      filter:brightness(0.55) saturate(1.05);
+    }
+    .hero::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 100%);
+    }
+    .hero-content{ position:relative; z-index:2; max-width:880px; padding:30px 24px; }
+    .hero .eyebrow{
+      color:var(--c-yellow);
+      margin-bottom:22px;
+    }
+    .hero h1{
+      font-size:clamp(38px,5.6vw,72px);
+      letter-spacing:clamp(1px,0.3vw,3px);
+      margin-bottom:24px;
+      text-shadow:2px 2px 14px rgba(0,0,0,0.5);
+    }
+    .hero h1 .accent{ color:var(--c-pink); }
+    .hero-lead{
+      font-size:clamp(16px,1.4vw,19px);
+      line-height:1.7;
+      max-width:640px;
+      margin:0 auto 38px;
+      font-weight:var(--fw-body);
+      text-shadow:1px 1px 4px rgba(0,0,0,0.4);
+    }
+
+    /* CTA buttons + supporting note. Touch target ≥ 44px.
+       Padding asimmetrico (top > bottom) per compensare la metrica
+       verticale del SuperGroteskC: uppercase senza descenders ha il
+       centro ottico sopra il centro geometrico del line-box. */
+    .cta-btn{
+      display:inline-block;
+      padding:22px 50px 18px;
+      background:var(--c-pink);
+      color:#fff;
+      border-radius:40px;
+      font-size:clamp(14px, 1.25vw, 16px);
+      font-weight:var(--fw-ui);
+      letter-spacing:var(--ls-label);
+      text-transform:uppercase;
+      transition:all 0.3s;
+      box-shadow:0 10px 30px rgba(240,103,166,0.45);
+      line-height:1;
+    }
+    .cta-btn:hover{
+      background:#fff;
+      color:var(--c-blue);
+      transform:translateY(-3px);
+    }
+    .cta-note{
+      display:block;
+      margin-top:18px;
+      font-size:clamp(12px, 1.05vw, 14px);
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      font-weight:var(--fw-label);
+      opacity:0.9;
+    }
+
+    /* ============================================================
+       INTRO
+       ============================================================ */
+    .intro{
+      background:#fff;
+      padding:90px 20px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .intro::before{
+      content:""; position:absolute; inset:0;
+      background:url('assets/firenze-bg.webp') center/cover no-repeat;
+      opacity:0.55; pointer-events:none;
+      z-index:0;
+    }
+    .intro::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0.70) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .intro-inner{ max-width:780px; margin:0 auto; position:relative; z-index:1; }
+    .intro h2{
+      font-size:clamp(32px,4.2vw,48px);
+      color:var(--c-blue);
+      margin-bottom:30px;
+    }
+    .intro h2 .accent{ color:var(--c-pink); }
+    .intro p{
+      font-size:clamp(16px,1.4vw,18px);
+      line-height:1.8;
+      margin-bottom:18px;
+    }
+    .intro-stats{
+      display:flex;
+      justify-content:center;
+      gap:clamp(20px,4vw,60px);
+      margin-top:50px;
+      flex-wrap:wrap;
+    }
+    .intro-stat{ min-width:120px; }
+    .intro-stat-num{
+      font-size:clamp(38px,3.8vw,50px);
+      font-weight:var(--fw-display);
+      color:var(--c-blue);
+      line-height:1;
+      margin-bottom:10px;
+      letter-spacing:var(--ls-head);
+    }
+    .intro-stat:nth-child(2) .intro-stat-num{ color:var(--c-pink); }
+    .intro-stat:nth-child(3) .intro-stat-num{ color:var(--c-yellow); }
+    .intro-stat-label{
+      font-size:clamp(12px, 1.05vw, 14px);
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      color:var(--c-gray);
+      font-weight:var(--fw-label);
+    }
+
+    /* ============================================================
+       MILANO CTA
+       ============================================================ */
+    .milano{
+      background:var(--c-blue);
+      color:#fff;
+      padding:90px 20px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .milano::before{
+      content:""; position:absolute; inset:0;
+      background:url('assets/calligraphy-bg.webp') center/cover no-repeat;
+      opacity:0.10; pointer-events:none;
+    }
+    .milano > *{ position:relative; z-index:1; }
+    .milano .eyebrow{
+      color:var(--c-yellow);
+      margin-bottom:22px;
+    }
+    .milano h2{
+      font-size:clamp(32px,4.2vw,52px);
+      color:#fff;
+      max-width:760px;
+      margin:0 auto 24px;
+      text-shadow:2px 2px 10px rgba(0,0,0,0.25);
+    }
+    .milano h2 .accent{ color:var(--c-pink); }
+    .milano p{
+      max-width:620px;
+      margin:0 auto 38px;
+      font-size:clamp(15px,1.3vw,18px);
+      line-height:1.75;
+      opacity:0.95;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer{
+      background:var(--c-blue-deep);
+      color:#fff;
+      padding:60px 24px 36px;
+      text-align:center;
+      font-size:15px;
+    }
+    .footer-logo{
+      width:clamp(140px, 14vw, 170px); height:auto;
+      display:block;
+      margin:0 auto 22px;
+      filter:brightness(0) invert(1);
+      opacity:0.95;
+    }
+    footer .tagline{
+      font-size:13px;
+      letter-spacing:2.5px;
+      text-transform:uppercase;
+      font-weight:var(--fw-label);
+      opacity:0.7;
+      margin-bottom:28px;
+    }
+    footer .links{
+      padding-top:24px;
+      border-top:1px solid rgba(255,255,255,0.15);
+      font-size:14px;
+    }
+    footer .links a{
+      text-decoration:underline;
+      text-decoration-thickness:1px;
+      text-underline-offset:4px;
+      opacity:0.9;
+      margin:0 8px;
+      display:inline-block;
+      padding:6px 4px;
+      min-height:32px;
+    }
+    footer .links a:hover{ color:var(--c-pink); opacity:1; }
+    footer .copy{
+      margin-top:20px;
+      font-size:12px;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      opacity:0.55;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       Breakpoints:
+         · ≤ 374px   → small phones (iPhone SE, mini Android)
+         · 375–767   → mobile (iPhone, Samsung, Pixel)
+         · 768–1023  → tablet portrait (iPad, Galaxy Tab portrait)
+         · 1024–1279 → tablet landscape / small desktop
+         · ≥ 1280    → desktop (default values via clamp)
+       Plus orientation tweaks for short landscape screens.
+       ============================================================ */
+
+    /* Tablet portrait & small landscape */
+    @media (max-width: 1023px){
+      .hero{ min-height:600px; padding:70px 0; }
+      .intro, .milano{ padding:70px 24px; }
+      footer{ padding:50px 24px 30px; }
+    }
+
+    /* Mobile (≤ 767px) */
+    @media (max-width: 767px){
+      body, html{ font-size:16px; line-height:1.6; }
+
+      header{ padding:14px 18px; gap:12px; }
+      .logo-img{ height:38px; }
+      .nav-cta{ padding:15px 20px 11px; font-size:13px; letter-spacing:1.5px; }
+
+      .hero{ min-height:560px; padding:60px 0; }
+      .hero-content{ padding:24px 20px; }
+      .hero h1{ font-size:34px; letter-spacing:1px; line-height:1.15; }
+      .hero-lead{ font-size:16px; line-height:1.65; margin-bottom:32px; }
+
+      .cta-btn{ padding:20px 38px 16px; font-size:14px; letter-spacing:1.5px; }
+      .cta-note{ font-size:12px; letter-spacing:1.2px; margin-top:14px; }
+      .eyebrow{ font-size:12px; letter-spacing:4px; }
+
+      .intro{ padding:64px 22px; }
+      .intro h2{ font-size:28px; line-height:1.18; margin-bottom:24px; }
+      .intro p{ font-size:16px; line-height:1.7; }
+      .intro-stats{ gap:28px 32px; margin-top:40px; }
+      .intro-stat{ min-width:90px; }
+      .intro-stat-num{ font-size:36px; }
+      .intro-stat-label{ font-size:11px; letter-spacing:1.2px; }
+
+      .milano{ padding:64px 22px; }
+      .milano h2{ font-size:28px; line-height:1.18; }
+      .milano p{ font-size:16px; line-height:1.7; }
+
+      footer{ padding:44px 22px 28px; font-size:14px; }
+      .footer-logo{ width:130px; }
+      footer .tagline{ font-size:12px; letter-spacing:2px; }
+      footer .links{ font-size:13px; }
+      footer .links a{ margin:4px 6px; }
+      footer .copy{ font-size:11px; letter-spacing:1.2px; line-height:1.5; }
+    }
+
+    /* Small mobile (≤ 374px – iPhone SE & mini) */
+    @media (max-width: 374px){
+      .hero h1{ font-size:30px; }
+      .hero-lead{ font-size:15px; }
+      .intro h2, .milano h2{ font-size:25px; }
+      .cta-btn{ padding:18px 30px 14px; font-size:13px; }
+      .nav-cta{ padding:14px 16px 10px; font-size:12px; }
+      .logo-img{ height:34px; }
+      .intro-stat-num{ font-size:32px; }
+      .intro-stats{ gap:22px; }
+    }
+
+    /* Mobile landscape (telefoni orientati orizzontali, schermo basso) */
+    @media (max-height: 500px) and (orientation: landscape){
+      .hero{ min-height:auto; padding:40px 0 50px; }
+      .hero h1{ font-size:clamp(26px, 5vw, 42px); margin-bottom:18px; }
+      .hero-lead{ font-size:15px; margin-bottom:24px; }
+      .hero .eyebrow{ margin-bottom:14px; }
+      .intro, .milano{ padding:50px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header-wrapper">
+  <header>
+    <a href="#top" aria-label="Badiani Firenze 1932">
+      <img src="assets/logo-badiani.svg" alt="Badiani Gelato Firenze 1932" class="logo-img">
+    </a>
+    <span></span>
+    <a href="https://orders.embargoapp.com/badianicatering/home" target="_blank" rel="noopener" class="nav-cta">Ordina ora</a>
+  </header>
+</div>
+
+<section id="top" class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Since 1932 · Ora a Milano</span>
+    <h1>Benvenuto nel mondo di<br><span class="accent">Badiani Firenze</span></h1>
+    <p class="hero-lead">
+      Dal cuore di Firenze portiamo a Milano il nostro autentico gelato artigianale, premiato a livello internazionale e consegnato in esclusiva due volte al mese.
+    </p>
+    <a href="https://orders.embargoapp.com/badianicatering/home" target="_blank" rel="noopener" class="cta-btn">
+      Inserisci il tuo indirizzo
+    </a>
+    <span class="cta-note">Disponibile solo a Milano · Su Embargo</span>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="intro-inner">
+    <h2>Un'eredità artigiana<br>nata a <span class="accent">Firenze nel 1932</span></h2>
+    <p>
+      Badiani è una delle realtà più prestigiose nel <span class="highlight-pink">gelato artigianale italiano</span>. Dalla città che ha dato i natali al gelato, abbiamo costruito una presenza che spazia da Firenze a Londra, Parigi e Barcellona.
+    </p>
+    <div class="intro-stats">
+      <div class="intro-stat">
+        <div class="intro-stat-num">1932</div>
+        <div class="intro-stat-label">Fondata a Firenze</div>
+      </div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">15+</div>
+        <div class="intro-stat-label">Gelaterie in Europa</div>
+      </div>
+      <div class="intro-stat">
+        <div class="intro-stat-num">4</div>
+        <div class="intro-stat-label">Paesi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="milano" id="milano">
+  <span class="eyebrow">Adesso anche a Milano</span>
+  <h2>Due consegne al mese.<br><span class="accent">Solo gelato fresco.</span></h2>
+  <p>Inserisci il tuo indirizzo per scoprire tutte le creazioni disponibili nella prossima finestra di consegna.</p>
+  <a href="https://orders.embargoapp.com/badianicatering/home" target="_blank" rel="noopener" class="cta-btn">Ordina su Embargo</a>
+  <span class="cta-note">Disponibile solo in zone selezionate di Milano</span>
+</section>
+
+<footer>
+  <img src="assets/logo-badiani.svg" alt="Badiani Gelato Firenze 1932" class="footer-logo">
+  <div class="tagline">Gelato Artigianale · Made in Italy</div>
+  <div class="links">
+    <a href="https://orders.embargoapp.com/badianicatering/home" target="_blank" rel="noopener">Ordina su Embargo</a>
+    <span style="opacity:.4">·</span>
+    <a href="https://www.badiani1932.com" target="_blank" rel="noopener">badiani1932.com</a>
+  </div>
+  <div class="copy">© 2026 · Badiani Gelato Firenze 1932</div>
+</footer>
+
+</body>
+</html>

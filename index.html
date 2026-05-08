@@ -118,12 +118,16 @@
       height:clamp(40px,3.6vw,50px); width:auto; object-fit:contain;
       filter:brightness(0) invert(1);
     }
+    /* Pill rosa: flex-center + line-height generosa (1.5).
+       Il half-leading di line-height>1 colloca le cap-height al centro
+       ottico del line-box, indipendentemente dalle metric specifiche
+       del SuperGroteskC. Padding simmetrico, niente magic numbers. */
     .nav-cta{
-      display:inline-block;
-      /* Padding asimmetrico: top più grande del bottom per compensare
-         la metrica verticale del SuperGroteskC (uppercase senza descenders
-         hanno il centro ottico sopra il centro geometrico). */
-      padding:19px 28px 11px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 28px;
+      min-height:44px;
       background:var(--c-pink);
       color:#fff;
       border-radius:30px;
@@ -133,7 +137,7 @@
       font-weight:var(--fw-ui);
       transition:all 0.3s;
       box-shadow:0 6px 20px rgba(240,103,166,0.35);
-      line-height:1;
+      line-height:1.5;
     }
     .nav-cta:hover{ background:#fff; color:var(--c-blue); transform:translateY(-2px); }
 
@@ -182,13 +186,15 @@
       text-shadow:1px 1px 4px rgba(0,0,0,0.4);
     }
 
-    /* CTA buttons + supporting note. Touch target ≥ 44px.
-       Padding asimmetrico (top > bottom) per compensare la metrica
-       verticale del SuperGroteskC: uppercase senza descenders ha il
-       centro ottico sopra il centro geometrico del line-box. */
+    /* CTA principale: stesso approccio del nav-cta.
+       Line-height 1.5 + flex-center → testo verticalmente centrato
+       indipendentemente dalle metric del SuperGroteskC. Touch target ≥ 44px. */
     .cta-btn{
-      display:inline-block;
-      padding:26px 50px 14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 50px;
+      min-height:54px;
       background:var(--c-pink);
       color:#fff;
       border-radius:40px;
@@ -198,7 +204,7 @@
       text-transform:uppercase;
       transition:all 0.3s;
       box-shadow:0 10px 30px rgba(240,103,166,0.45);
-      line-height:1;
+      line-height:1.5;
     }
     .cta-btn:hover{
       background:#fff;
@@ -385,14 +391,14 @@
 
       header{ padding:14px 18px; gap:12px; }
       .logo-img{ height:38px; }
-      .nav-cta{ padding:17px 20px 9px; font-size:13px; letter-spacing:1.5px; }
+      .nav-cta{ padding:11px 20px; font-size:13px; letter-spacing:1.5px; min-height:44px; }
 
       .hero{ min-height:560px; padding:60px 0; }
       .hero-content{ padding:24px 20px; }
       .hero h1{ font-size:34px; letter-spacing:1px; line-height:1.15; }
       .hero-lead{ font-size:16px; line-height:1.65; margin-bottom:32px; }
 
-      .cta-btn{ padding:24px 38px 12px; font-size:14px; letter-spacing:1.5px; }
+      .cta-btn{ padding:14px 38px; font-size:14px; letter-spacing:1.5px; min-height:54px; }
       .cta-note{ font-size:12px; letter-spacing:1.2px; margin-top:14px; }
       .eyebrow{ font-size:12px; letter-spacing:4px; }
 
@@ -421,8 +427,8 @@
       .hero h1{ font-size:30px; }
       .hero-lead{ font-size:15px; }
       .intro h2, .milano h2{ font-size:25px; }
-      .cta-btn{ padding:22px 30px 10px; font-size:13px; }
-      .nav-cta{ padding:16px 16px 8px; font-size:12px; }
+      .cta-btn{ padding:13px 30px; font-size:13px; min-height:50px; }
+      .nav-cta{ padding:10px 16px; font-size:12px; min-height:42px; }
       .logo-img{ height:34px; }
       .intro-stat-num{ font-size:32px; }
       .intro-stats{ gap:22px; }

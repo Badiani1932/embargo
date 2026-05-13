@@ -287,10 +287,16 @@
     .milano{
       background:var(--c-blue);
       color:#fff;
-      padding:90px 20px;
+      min-height:520px;
+      padding:70px 20px;
       text-align:center;
       position:relative;
       overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:0;
     }
     .milano::before{
       content:""; position:absolute; inset:0;
@@ -300,19 +306,19 @@
     .milano > *{ position:relative; z-index:1; }
     .milano .eyebrow{
       color:var(--c-yellow);
-      margin-bottom:22px;
+      margin-bottom:18px;
     }
     .milano h2{
       font-size:clamp(32px,4.2vw,52px);
       color:#fff;
       max-width:760px;
-      margin:0 auto 24px;
+      margin:0 0 20px;
       text-shadow:2px 2px 10px rgba(0,0,0,0.25);
     }
     .milano h2 .accent{ color:var(--c-pink); }
     .milano p{
       max-width:620px;
-      margin:0 auto 28px;
+      margin:0 0 24px;
       font-size:clamp(15px,1.3vw,18px);
       line-height:1.75;
       opacity:0.95;
@@ -410,7 +416,7 @@
       .intro-stat-num{ font-size:36px; }
       .intro-stat-label{ font-size:11px; letter-spacing:1.2px; }
 
-      .milano{ padding:64px 22px; }
+      .milano{ padding:56px 22px; min-height:480px; }
       .milano h2{ font-size:28px; line-height:1.18; }
       .milano p{ font-size:16px; line-height:1.7; }
 

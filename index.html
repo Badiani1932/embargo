@@ -219,16 +219,21 @@
       content:""; position:absolute; inset:0;
       background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 100%);
     }
-    .hero-content{ position:relative; z-index:2; max-width:880px; padding:30px 24px; }
+    .hero-content{ position:relative; z-index:2; max-width:1120px; padding:30px 24px; }
     .hero .eyebrow{
       color:var(--c-yellow);
       margin-bottom:22px;
     }
     .hero h1{
-      font-size:clamp(38px,5.6vw,72px);
+      font-size:clamp(38px,5.4vw,68px);
       letter-spacing:clamp(1px,0.3vw,3px);
       margin-bottom:24px;
       text-shadow:2px 2px 14px rgba(0,0,0,0.5);
+      text-wrap:balance;
+    }
+    /* Da tablet in su forziamo il titolo su 2 righe (la <br> nell'HTML separa le righe) */
+    @media (min-width: 768px){
+      .hero h1{ white-space:nowrap; }
     }
     .hero h1 .accent{ color:var(--c-pink); }
     .hero-lead{

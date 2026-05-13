@@ -17,21 +17,29 @@
   <style>
     /* ============================================================
        BADIANI · TYPE SYSTEM
-       Single font family: SuperGroteskC (variable weight 1–1000).
-       Tutti i caratteri (lettere, cifre, punteggiatura, accenti, smart quotes)
-       passano per la stessa font → peso coerente al 100%.
+       SuperGroteskA-Rg    → weight 400  (body / regular)
+       SuperGroteskC-MedLF → weight 500  (UI / medium)
+       SuperGroteskB-CdMed → weight 700  (display / bold — titoli)
+       AvenirLTProLight    → famiglia separata 'Avenir' (accenti editoriali)
        ============================================================ */
     @font-face{
       font-family:'Badiani';
       src:url('fonts/SuperGroteskC-MedLF.otf') format('opentype');
-      font-weight:1 1000;
+      font-weight:400 600;
       font-style:normal;
       font-display:swap;
     }
     @font-face{
-      font-family:'BadianiDisplay';
-      src:url('fonts/SuperGroteskA-Var.woff2') format('woff2');
-      font-weight:1 1000;
+      font-family:'Badiani';
+      src:url('fonts/SuperGroteskB-CdMed.woff') format('woff');
+      font-weight:700 900;
+      font-style:normal;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:'Avenir';
+      src:url('fonts/AvenirLTProLight.otf') format('opentype');
+      font-weight:300;
       font-style:normal;
       font-display:swap;
     }
@@ -81,8 +89,8 @@
     img{ max-width:100%; display:block; }
 
     h1, h2, h3{
-      font-family:'BadianiDisplay', 'Badiani', system-ui, sans-serif;
-      font-weight:900;
+      font-family:'Badiani', system-ui, sans-serif;
+      font-weight:700;
       text-transform:uppercase;
       letter-spacing:var(--ls-head);
       line-height:1.12;

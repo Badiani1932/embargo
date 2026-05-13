@@ -14,3 +14,7 @@ desktop.ini
 .cache/
 *.log
 *.tmp
+
+# Local dev (preview only — not deployed)
+.claude/
+server.js

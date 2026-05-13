@@ -2,25 +2,70 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1e398d">
+  <meta name="color-scheme" content="light">
   <title>Badiani Firenze 1932 — Ora a Milano</title>
   <meta name="description" content="Dal cuore di Firenze, il nostro autentico gelato di tradizione fiorentina arriva a Milano. Consegne esclusive due volte al mese. Ordina su Embargo.">
+  <meta name="keywords" content="Badiani, gelato, Firenze, Milano, consegna a domicilio, gelato Buontalenti, Embargo">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Badiani Gelato Firenze 1932">
+  <link rel="canonical" href="https://badiani1932.github.io/embargo/">
 
+  <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://badiani1932.github.io/embargo/">
+  <meta property="og:site_name" content="Badiani Firenze 1932">
   <meta property="og:title" content="Badiani Firenze 1932 — Ora a Milano">
   <meta property="og:description" content="Dal cuore di Firenze, il nostro autentico gelato di tradizione fiorentina arriva a Milano. Consegne esclusive due volte al mese.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="milano-badiani-standing.webp">
+  <meta property="og:image" content="https://badiani1932.github.io/embargo/milano-badiani-standing.webp">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta property="og:image:alt" content="Donna con coppa Badiani in Piazza del Duomo, Milano">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Badiani Firenze 1932 — Ora a Milano">
+  <meta name="twitter:description" content="Dal cuore di Firenze, il nostro autentico gelato di tradizione fiorentina arriva a Milano.">
+  <meta name="twitter:image" content="https://badiani1932.github.io/embargo/milano-badiani-standing.webp">
 
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+  <!-- Preload critical assets (LCP) -->
+  <link rel="preload" as="image" href="milano-badiani-standing.webp" fetchpriority="high">
+  <link rel="preload" as="font" href="fonts/SuperGroteskC-MedLF.otf" type="font/otf" crossorigin>
+  <link rel="preload" as="font" href="fonts/SuperGroteskB-CdMed.woff" type="font/woff" crossorigin>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    "name": "Badiani Gelato Firenze 1932",
+    "alternateName": "Badiani 1932",
+    "url": "https://www.badiani1932.com",
+    "logo": "https://badiani1932.github.io/embargo/assets/logo-badiani.svg",
+    "image": "https://badiani1932.github.io/embargo/milano-badiani-standing.webp",
+    "description": "Gelato di tradizione fiorentina dal 1932. Consegna esclusiva a Milano via Embargo.",
+    "foundingDate": "1932",
+    "foundingLocation": "Firenze, Italia",
+    "areaServed": ["Milano", "Firenze", "Londra", "Parigi", "Barcellona"],
+    "servesCuisine": "Italian gelato",
+    "potentialAction": {
+      "@type": "OrderAction",
+      "target": "https://orders.embargoapp.com/badianicatering/home",
+      "deliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModeOwnFleet"
+    }
+  }
+  </script>
+
   <style>
     /* ============================================================
        BADIANI · TYPE SYSTEM
-       SuperGroteskA-Rg    → weight 400  (body / regular)
-       SuperGroteskC-MedLF → weight 500  (UI / medium)
-       SuperGroteskB-CdMed → weight 700  (display / bold — titoli)
-       AvenirLTProLight    → famiglia separata 'Avenir' (accenti editoriali)
+       SuperGroteskC-MedLF → 400-600 (body / UI / medium)
+       SuperGroteskB-CdMed → 700-900 (display / bold — titoli)
        ============================================================ */
     @font-face{
       font-family:'Badiani';
@@ -33,13 +78,6 @@
       font-family:'Badiani';
       src:url('fonts/SuperGroteskB-CdMed.woff') format('woff');
       font-weight:700 900;
-      font-style:normal;
-      font-display:swap;
-    }
-    @font-face{
-      font-family:'Avenir';
-      src:url('fonts/AvenirLTProLight.otf') format('opentype');
-      font-weight:300;
       font-style:normal;
       font-display:swap;
     }
@@ -409,11 +447,11 @@
 
     /* Mobile (≤ 767px) */
     @media (max-width: 767px){
-      body, html{ font-size:16px; line-height:1.6; }
+      body, html{ font-size:16px; line-height:1.65; }
 
       header{ padding:14px 18px; gap:12px; }
       .logo-img{ height:38px; }
-      .nav-cta{ padding:11px 20px; font-size:13px; letter-spacing:1.5px; min-height:44px; }
+      .nav-cta{ padding:11px 22px; font-size:13px; letter-spacing:1.5px; min-height:44px; }
 
       .hero{ min-height:560px; padding:60px 0; }
       .hero-content{ padding:24px 20px; }
@@ -430,7 +468,7 @@
       .intro-stats{ gap:28px 32px; margin-top:40px; }
       .intro-stat{ min-width:90px; }
       .intro-stat-num{ font-size:36px; }
-      .intro-stat-label{ font-size:11px; letter-spacing:1.2px; }
+      .intro-stat-label{ font-size:12px; letter-spacing:1.3px; }
 
       .milano{ padding:56px 22px; min-height:480px; }
       .milano h2{ font-size:28px; line-height:1.18; }
@@ -441,19 +479,33 @@
       footer .tagline{ font-size:12px; letter-spacing:2px; }
       footer .links{ font-size:13px; }
       footer .links a{ margin:4px 6px; }
-      footer .copy{ font-size:11px; letter-spacing:1.2px; line-height:1.5; }
+      footer .copy{ font-size:12px; letter-spacing:1.3px; line-height:1.5; }
     }
 
-    /* Small mobile (≤ 374px – iPhone SE & mini) */
+    /* Small mobile (≤ 374px – iPhone SE, Galaxy S, mini phones) */
     @media (max-width: 374px){
-      .hero h1{ font-size:30px; }
-      .hero-lead{ font-size:15px; }
+      .hero h1{ font-size:30px; letter-spacing:0.5px; }
+      .hero-lead{ font-size:15px; line-height:1.6; }
       .intro h2, .milano h2{ font-size:25px; }
-      .cta-btn{ padding:13px 30px; font-size:13px; min-height:50px; }
-      .nav-cta{ padding:10px 16px; font-size:12px; min-height:42px; }
+      .intro p, .milano p{ font-size:15px; line-height:1.65; }
+      .cta-btn{ padding:13px 28px; font-size:13px; min-height:50px; letter-spacing:1.3px; }
+      .nav-cta{ padding:10px 16px; font-size:12px; min-height:42px; letter-spacing:1.3px; }
       .logo-img{ height:34px; }
       .intro-stat-num{ font-size:32px; }
-      .intro-stats{ gap:22px; }
+      .intro-stat-label{ font-size:11px; letter-spacing:1.2px; }
+      .intro-stats{ gap:22px 28px; }
+      .eyebrow{ font-size:11px; letter-spacing:3.5px; }
+      .cta-note{ font-size:11px; letter-spacing:1px; }
+    }
+
+    /* Extra-small (≤ 320px – iPhone 5/SE 1st gen, foldable closed) */
+    @media (max-width: 320px){
+      .hero h1{ font-size:27px; }
+      .intro h2, .milano h2{ font-size:23px; }
+      .cta-btn{ padding:12px 22px; font-size:12px; letter-spacing:1.2px; }
+      header{ padding:12px 14px; }
+      .logo-img{ height:30px; }
+      .nav-cta{ padding:9px 13px; font-size:11px; }
     }
 
     /* Mobile landscape (telefoni orientati orizzontali, schermo basso) */
@@ -463,6 +515,28 @@
       .hero-lead{ font-size:15px; margin-bottom:24px; }
       .hero .eyebrow{ margin-bottom:14px; }
       .intro, .milano{ padding:50px 24px; }
+      .milano{ min-height:auto; }
+    }
+
+    /* Large desktop / 4K screens — scale up gracefully */
+    @media (min-width: 1920px){
+      body, html{ font-size:18px; }
+      .hero h1{ font-size:84px; }
+      .hero-lead{ font-size:21px; }
+      .intro h2, .milano h2{ font-size:58px; }
+    }
+
+    /* Accessibility: respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after{
+        animation-duration:0.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:0.01ms !important;
+        scroll-behavior:auto !important;
+      }
+      .cta-btn:hover, .nav-cta:hover, footer .links a:hover{
+        transform:none !important;
+      }
     }
   </style>
 </head>

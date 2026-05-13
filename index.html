@@ -28,6 +28,13 @@
       font-style:normal;
       font-display:swap;
     }
+    @font-face{
+      font-family:'BadianiDisplay';
+      src:url('fonts/SuperGroteskA-Var.woff2') format('woff2');
+      font-weight:1 1000;
+      font-style:normal;
+      font-display:swap;
+    }
 
     /* ============================================================
        DESIGN TOKENS
@@ -74,7 +81,8 @@
     img{ max-width:100%; display:block; }
 
     h1, h2, h3{
-      font-weight:var(--fw-display);
+      font-family:'BadianiDisplay', 'Badiani', system-ui, sans-serif;
+      font-weight:900;
       text-transform:uppercase;
       letter-spacing:var(--ls-head);
       line-height:1.12;

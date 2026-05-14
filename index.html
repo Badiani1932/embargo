@@ -123,7 +123,9 @@
       line-height:1.65;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
+      /* clip (non hidden): taglia l'overflow orizzontale SENZA creare
+         uno scroll container → position:sticky dell'header resta funzionante */
+      overflow-x:clip;
     }
     em, i{ font-style:normal; }
     a{ color:inherit; text-decoration:none; }

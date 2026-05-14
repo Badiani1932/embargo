@@ -107,6 +107,9 @@
       --ls-head:1px;
       --ls-label:2px;
       --ls-eyebrow:5px;
+
+      /* Layout */
+      --header-pad-x:clamp(16px,3.2vw,40px);
     }
 
     *{margin:0; padding:0; box-sizing:border-box;}
@@ -158,19 +161,35 @@
 
     /* ============================================================
        HEADER
+       Due stati:
+       · top (default)   → logo centrato, CTA nascosto
+       · .scrolled       → logo a sinistra, CTA visibile
+       La classe .scrolled viene aggiunta via JS allo scroll.
        ============================================================ */
     .header-wrapper{ position:sticky; top:0; z-index:1000; box-shadow:0 2px 14px rgba(0,0,0,0.18); }
     header{
       background:var(--c-blue);
-      padding:16px clamp(16px,3.2vw,40px);
-      display:grid;
-      grid-template-columns:auto 1fr auto;
+      padding:16px var(--header-pad-x);
+      display:flex;
       align-items:center;
-      gap:clamp(10px,1.6vw,24px);
+      justify-content:space-between;
+    }
+    .logo-link{
+      display:inline-flex;
+      transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+      will-change:transform;
     }
     .logo-img{
       height:clamp(40px,3.6vw,50px); width:auto; object-fit:contain;
       filter:brightness(0) invert(1);
+    }
+    /* Stato TOP: logo spinto al centro pagina (50vw − metà logo − padding) */
+    header:not(.scrolled) .logo-link{
+      transform:translateX(calc(50vw - 50% - var(--header-pad-x)));
+    }
+    /* Stato SCROLLED: logo torna a sinistra */
+    header.scrolled .logo-link{
+      transform:translateX(0);
     }
     /* Pill rosa: flex-center + line-height generosa (1.5).
        Il half-leading di line-height>1 colloca le cap-height al centro
@@ -189,11 +208,19 @@
       letter-spacing:var(--ls-label);
       text-transform:uppercase;
       font-weight:var(--fw-ui);
-      transition:all 0.3s;
+      transition:opacity 0.45s ease, background 0.3s, color 0.3s, transform 0.3s;
       box-shadow:0 6px 20px rgba(240,103,166,0.35);
       line-height:1.5;
     }
     .nav-cta:hover{ background:#fff; color:var(--c-blue); transform:translateY(-2px); }
+    /* Stato TOP: CTA invisibile e non cliccabile */
+    header:not(.scrolled) .nav-cta{
+      opacity:0;
+      pointer-events:none;
+    }
+    header.scrolled .nav-cta{
+      opacity:1;
+    }
 
     /* ============================================================
        HERO
@@ -404,7 +431,9 @@
       color:rgba(255,255,255,0.85);
     }
     .howto-costs{
-      display:inline-flex;
+      display:flex;
+      width:fit-content;
+      margin:0 auto;
       align-items:center;
       gap:clamp(16px,3vw,32px);
       background:rgba(255,255,255,0.08);
@@ -430,6 +459,7 @@
       width:1px; height:22px;
       background:rgba(255,255,255,0.28);
     }
+    .howto-cta{ margin-top:40px; }
 
     /* ============================================================
        BADIANI LOYALTY (programma fedeltà)
@@ -706,10 +736,9 @@
 
 <div class="header-wrapper">
   <header>
-    <a href="#top" aria-label="Badiani Firenze 1932">
+    <a href="#top" class="logo-link" aria-label="Badiani Firenze 1932">
       <img src="assets/logo-badiani.svg" alt="Badiani Gelato Firenze 1932" class="logo-img">
     </a>
-    <span></span>
     <a href="https://orders.embargoapp.com/badianicatering/home" target="_blank" rel="noopener" class="nav-cta">Ordina ora</a>
   </header>
 </div>
@@ -756,6 +785,7 @@
       <span class="howto-cost-sep" aria-hidden="true"></span>
       <span class="howto-cost"><strong>Spesa di consegna</strong>€10,00</span>
     </div>
+    <a href="https://orders.embargoapp.com/badianicatering/home" target="_blank" rel="noopener" class="cta-btn howto-cta">Ordina ora</a>
   </div>
 </section>
 
@@ -822,6 +852,32 @@
   </div>
   <div class="copy">© 2026 · Badiani Gelato Firenze 1932</div>
 </footer>
+
+<script>
+  /* Header scroll state — logo centrato/CTA nascosto in cima,
+     logo a sinistra/CTA visibile quando si scrolla. */
+  (function(){
+    var header = document.querySelector('header');
+    var SHOW_AFTER = 80; // px di scroll prima di mostrare il CTA
+    var ticking = false;
+    function update(){
+      if (window.scrollY > SHOW_AFTER){
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      ticking = false;
+    }
+    function onScroll(){
+      if (!ticking){
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update(); // stato iniziale al caricamento
+  })();
+</script>
 
 </body>
 </html>
